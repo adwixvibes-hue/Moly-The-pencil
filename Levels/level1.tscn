@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://d028ctptiifoc"]
+
+[ext_resource type="Script" uid="uid://5jhjms6xbi4a" path="res://Scripts/Player.gd" id="1_t21ke"]
+[ext_resource type="Script" uid="uid://en6sg0debcan" path="res://Scripts/pencil.gd" id="2_fy36t"]
+[ext_resource type="PackedScene" uid="uid://bncxnyu5bbri1" path="res://Classes/line_3d.tscn" id="2_i4kf4"]
+[ext_resource type="PackedScene" uid="uid://dcimixjwkl6e4" path="res://Models/Pencil/Moly.glb" id="2_njhy2"]
+[ext_resource type="Texture2D" uid="uid://u1tivnsxytey" path="res://Models/Pencil/Moly_Pencil.png" id="3_302sc"]
+[ext_resource type="Material" uid="uid://deffi0n8aj8ub" path="res://Models/Pencil/Pencil.tres" id="4_aunfx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t21ke"]
+sky_top_color = Color(0.29620785, 0.2373966, 0.25344303, 1)
+sky_horizon_color = Color(0.4039901, 0.38196933, 0.37989616, 1)
+ground_bottom_color = Color(0.13054535, 0.101273514, 0.07693451, 1)
+ground_horizon_color = Color(0.4039901, 0.38196933, 0.37989616, 1)
+energy_multiplier = 1.6
+
+[sub_resource type="Sky" id="Sky_i4kf4"]
+sky_material = SubResource("ProceduralSkyMaterial_t21ke")
+
+[sub_resource type="Environment" id="Environment_fy36t"]
+background_mode = 2
+sky = SubResource("Sky_i4kf4")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfe2p"]
+radius = 0.19726563
+height = 2.4736328
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njhy2"]
+next_pass = ExtResource("4_aunfx")
+shading_mode = 0
+albedo_texture = ExtResource("3_302sc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1onf"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_7k1o1"]
+material = SubResource("StandardMaterial3D_l1onf")
+
+[sub_resource type="Curve" id="Curve_302sc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Node3D" type="Node3D" unique_id=1885726595]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1355778594]
+environment = SubResource("Environment_fy36t")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=416751919]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1139217435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3746338, -1.5764124, 0.019195557)
+size = Vector3(16.008057, 1, 13.318787)
+
+[node name="Pencil parrent" type="Node3D" parent="." unique_id=1569651913]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1537919484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67026067, 0)
+script = ExtResource("1_t21ke")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=741796441]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2368164, 0)
+shape = SubResource("CapsuleShape3D_pfe2p")
+
+[node name="Node3D" type="Node3D" parent="CharacterBody3D" unique_id=1069356283]
+
+[node name="Moly" parent="CharacterBody3D/Node3D" unique_id=1705413763 instance=ExtResource("2_njhy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5008072, 0)
+
+[node name="Circle" parent="CharacterBody3D/Node3D/Moly" index="0" unique_id=1912396366]
+material_override = SubResource("StandardMaterial3D_njhy2")
+
+[node name="Pivot" type="Node3D" parent="CharacterBody3D" unique_id=1885389572]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Pivot" unique_id=1030035032]
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Pivot/SpringArm3D" unique_id=1659547651]
+
+[node name="Pencil" type="Node3D" parent="CharacterBody3D" unique_id=138349922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4704689, 0)
+script = ExtResource("2_fy36t")
+
+[node name="Line3D" parent="CharacterBody3D/Pencil" unique_id=520821908 instance=ExtResource("2_i4kf4")]
+width = 0.1
+color = Color(0, 0.5568628, 0.7647059, 1)
+
+[node name="particles" type="CPUParticles3D" parent="CharacterBody3D/Pencil" unique_id=2020787345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016072392, 0)
+cast_shadow = 0
+emitting = false
+mesh = SubResource("SphereMesh_7k1o1")
+direction = Vector3(0, 0, 0)
+spread = 30.0
+gravity = Vector3(0, 2, 0)
+initial_velocity_min = 0.2
+initial_velocity_max = 1.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_302sc")
+
+[editable path="CharacterBody3D/Node3D/Moly"]
