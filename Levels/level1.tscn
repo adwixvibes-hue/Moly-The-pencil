@@ -20,6 +20,11 @@ sky_material = SubResource("ProceduralSkyMaterial_t21ke")
 [sub_resource type="Environment" id="Environment_fy36t"]
 background_mode = 2
 sky = SubResource("Sky_i4kf4")
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 1.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s2fxl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfe2p"]
 radius = 0.19726563
@@ -43,6 +48,10 @@ point_count = 2
 
 [node name="Node3D" type="Node3D" unique_id=1885726595]
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=603700167]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1355778594]
 environment = SubResource("Environment_fy36t")
 
@@ -52,6 +61,7 @@ use_collision = true
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1139217435]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3746338, -1.5764124, 0.019195557)
 size = Vector3(16.008057, 1, 13.318787)
+material = SubResource("StandardMaterial3D_s2fxl")
 
 [node name="Pencil parrent" type="Node3D" parent="." unique_id=1569651913]
 
@@ -84,7 +94,7 @@ script = ExtResource("2_fy36t")
 
 [node name="Line3D" parent="CharacterBody3D/Pencil" unique_id=520821908 instance=ExtResource("2_i4kf4")]
 width = 0.1
-color = Color(0, 0.5568628, 0.7647059, 1)
+color = Color(0.6448834, 0.8705594, 1, 1)
 
 [node name="particles" type="CPUParticles3D" parent="CharacterBody3D/Pencil" unique_id=2020787345]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016072392, 0)

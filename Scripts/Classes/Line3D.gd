@@ -18,6 +18,8 @@ func add_point(end_point: Vector3) -> void:
 
 	material.albedo_color = color
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED 
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.emission_enabled = true
 	mesh.material = material
 
 	var start_point: Vector3 = points.get(points.size() -1)
