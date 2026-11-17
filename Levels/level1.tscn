@@ -78,7 +78,7 @@ shape = SubResource("CapsuleShape3D_pfe2p")
 [node name="Moly" parent="CharacterBody3D/Node3D" unique_id=1705413763 instance=ExtResource("2_njhy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5008072, 0)
 
-[node name="Circle" parent="CharacterBody3D/Node3D/Moly" index="0" unique_id=1912396366]
+[node name="Circle" parent="CharacterBody3D/Node3D/Moly" index="0" unique_id=529493737]
 material_override = SubResource("StandardMaterial3D_njhy2")
 
 [node name="Pivot" type="Node3D" parent="CharacterBody3D" unique_id=1885389572]
